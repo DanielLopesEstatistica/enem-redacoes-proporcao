@@ -1,0 +1,30 @@
+```{r}
+dados = readxl::read_xlsx("C:/R/Enem Notas/dados.xlsx")
+regioes = unique(dados$Regiao)
+notas_regioes = data.frame(regiao = regioes, notas = c(5, 25, 5, 18, 7))
+
+lista = list()
+lista2 = list()
+
+for(n in 1:length(regioes)){
+  pop = dados[dados$Regiao == regioes[n],2] |> sum()
+  notas = notas_regioes[n,2]
+  lista2[[n]] = data.frame(pop = pop, nota = notas, regiao = regioes[n])
+  prop.test(notas, pop, conf.level = 0.95) -> x
+  linha = data.frame(estimate = x$estimate, int1 = x$conf.int[1], int2 = x$conf.int[2], regiao = regioes[n])
+  lista[[n]] = linha
+}
+
+df = do.call(rbind, lista)
+df2 = do.call(rbind, lista2)
+
+library(ggplot2)
+
+ggplot(df, aes(regioes, estimate)) +        # ggplot2 plot with confidence intervals
+  geom_point() +
+  geom_errorbar(aes(ymin = int1, ymax = int2))+
+  theme_bw()+
+  xlab("Região")+
+  ylab("Proporção de alunos nota 1000")
+```
+
