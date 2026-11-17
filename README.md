@@ -1,21 +1,23 @@
-﻿# Enem Notas
+﻿<sub>**Datas:** pasta 17/01/2024 · código 17/01/2024 (`dados.xlsx`)</sub>
 
-## Data de criação
+# Enem — proporção de nota máxima por região
 
-Datas inferidas dos metadados dos arquivos em `C:\R\Enem Notas` (Windows).
+Testes de proporção (`prop.test`) comparando fração de nota máxima entre **regiões** do Brasil.
 
-| Referência | Data |
-|------------|------|
-| Pasta criada no disco | 17 de janeiro de 2024 |
-| Primeiro código ou notebook versionado | 17 de janeiro de 2024 (`enem.Rmd`) |
-| Repositório Git (commit inicial) | 16 de novembro de 2026 |
+## O que o código faz
 
-Projeto local em `C:\R\Enem Notas`.
+`enem.Rmd`:
 
-## Como usar
+- Lê contagens por região em `dados.xlsx`.
+- Combina com vetor fixo `notas_regioes` (contagens de nota máxima por região).
+- Intervalos de confiança e gráfico comparativo.
 
-Abra os arquivos `.R`, `.Rmd`, `.py` ou o `.Rproj` nesta pasta no RStudio ou no editor de sua preferência.
+## Dados
 
-## Dados grandes
+`dados.xlsx` — colunas usadas: `Regiao` e a 2ª coluna (população ou base de referência para o teste).
 
-Arquivos acima de 100 MB podem estar listados no `.gitignore`; obtenha-os localmente se o código referenciar esses caminhos.
+Ajuste o path no Rmd se não for `C:/R/Enem Notas/dados.xlsx`.
+
+## Como rodar
+
+Knit `enem.Rmd` (`readxl`).
